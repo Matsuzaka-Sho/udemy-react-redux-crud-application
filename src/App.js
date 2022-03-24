@@ -1,55 +1,30 @@
 import React from 'react';
 import './App.css';
 
-//class App extends Component {
-//  render(){
-//    return (
-//    <React.Fragment>
-//      <label htmlFor='bar'>bar</label>
-//      <input type='text' onChange={() => {console.log('I am clicked!')}} />;
-//    </React.Fragment>
-//    )
-//  }
-//}
-
-//class App extends Component {
-//  render(){
-//    const greeting = 'Hi!'
-//    const dom = <h1 className='foo'>{greeting}</h1>
-//    return dom;
-//  }
-//}
-
-//# html部分をconstとして格納することもできる。
-//class App extends Component {
-//  render(){
-//    const dom = <h1>Hi!</h1>
-//    return dom;
-//  }
-//}
-
-//class App extends Component {
-//  render(){
-//    return React.createElement(
-//    "div",
-//    null,
-//    "Hello, world!"
-//    );
-//  }
-//}
-
 const App = () =>{
-    return (
+  const profiles = [
+    { name: 'Taro', age: 10},
+    { name: 'Hana', age: 30},
+    { name: 'NoName'} // 省略した場合、下にあるdefaultPropsのname:1が入ってくる。
+  ]
+  return (
     <div>
-      <Cat />
-      <Cat />
-      <Cat />
-      <Cat />
+      {
+        profiles.map((profile, index) => {
+          return <User name={profile.name} age={profile.age} key={index}/>
+        })
+      }
     </div>
-    )
+  )
 }
 
-const Cat = () =>{
-    return <div>Hi</div>
+const User = (props) =>{
+    return <div>Hi, I am {props.name}. My age is {props.age}</div>
 }
+
+User.defaultProps={
+  age: 1
+}
+
 export default App;
+
